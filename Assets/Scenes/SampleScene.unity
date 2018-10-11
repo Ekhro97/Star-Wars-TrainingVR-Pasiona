@@ -605,6 +605,15 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114910857974021320, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc,
+        type: 2}
+      propertyPath: JumpForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890617556522402, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 33927106308280594, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
     - {fileID: 23761104141517712, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
@@ -1153,7 +1162,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 745526915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.86, z: -3.29}
+  m_LocalPosition: {x: 0, y: 1.55, z: -3.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1222976428}
@@ -1743,10 +1752,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 108483004718685918, guid: 59db2a0b703dc674aa6c0e2fa44d615c,
+    - target: {fileID: 54178588866822244, guid: 59db2a0b703dc674aa6c0e2fa44d615c,
         type: 2}
-      propertyPath: m_Intensity
-      value: 2
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59db2a0b703dc674aa6c0e2fa44d615c, type: 2}
@@ -1885,7 +1894,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.003921747, g: 1, b: 0, a: 1}
-  m_Intensity: 2
+  m_Intensity: 3
   m_Range: 2
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1912,6 +1921,24 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1350176553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1560920619732022, guid: 59db2a0b703dc674aa6c0e2fa44d615c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1113228893}
+--- !u!136 &1350176554
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350176553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2.0000005
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1392513021
 Prefab:
   m_ObjectHideFlags: 0
@@ -2211,7 +2238,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.0048570633, g: 1, b: 0, a: 1}
-  m_Intensity: 2
+  m_Intensity: 3
   m_Range: 2
   m_SpotAngle: 30
   m_CookieSize: 10

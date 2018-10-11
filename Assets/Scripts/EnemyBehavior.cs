@@ -6,11 +6,6 @@ using UnityEngine.AI;
 public class EnemyBehavior : MonoBehaviour
 {
 
-    #region Public Variables
-
-
-    #endregion
-
     #region Private Variables
     [SerializeField]
     private GameObject _player;
@@ -61,7 +56,6 @@ public class EnemyBehavior : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-            Debug.Log("Pim");
             Fire();
             yield return new WaitForSeconds(_chargeShotTime);
             
