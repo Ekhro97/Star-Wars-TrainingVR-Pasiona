@@ -22,6 +22,7 @@ public class EnemyBehavior : MonoBehaviour
     private float _minMovingTime;
     [SerializeField]
     private float _maxMovingTime;
+    
 
     #endregion
 
@@ -31,53 +32,37 @@ public class EnemyBehavior : MonoBehaviour
     {
         StartCoroutine(RandomWait());
     }
-    
+
     IEnumerator RandomWait()
     {
         while (true)
         {
-
             float elapsedTime = 0f;
-            StartCoroutine(Move(elapsedTime));
-
-            yield return new WaitForSeconds(_chargeShotTime);
-
-
+            System.Random random = new System.Random();
+            int orientation = (random.Next(0, 2));
+            double movingTime = Random.Range(_minMovingTime, _maxMovingTime);
+            Debug.Log(movingTime);
+            while (elapsedTime < movingTime)
+            {
+                if(orientation == 1)
+                {
+                    transform.RotateAround(_player.transform.position, Vector3.up, _speed * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    transform.RotateAround(_player.transform.position, Vector3.down, _speed * Time.fixedDeltaTime);
+                }
+                
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
             Debug.Log("Pim");
-        }
-        
-        
-
-
-    }
-
-    IEnumerator Move(float elapsedTime)
-    {
-        System.Random random = new System.Random();
-        int orientation = random.Next(0, 2);
-        while (elapsedTime < Random.Range(_minMovingTime, _maxMovingTime))
-        {
+            yield return new WaitForSeconds(_chargeShotTime);
             
 
-            OrbitAround(orientation);
-            elapsedTime += Time.deltaTime;
-            yield return null;
         }
     }
-
-    private void OrbitAround(int orientation)
-    {
-        System.Random random = new System.Random();
-        if(orientation == 1)
-        {
-            transform.RotateAround(_player.transform.position, Vector3.up, _speed * Time.deltaTime);
-        }
-        else
-        {
-            transform.RotateAround(_player.transform.position, Vector3.down, _speed * Time.deltaTime);
-        }
-            
-    }
+        
 
     #endregion
 
