@@ -4,10 +4,10 @@ using System.Collections;
 public class lightsaber : MonoBehaviour {
 
 	LineRenderer lineRend;
-	public Transform startPos;
-	public Transform endPos;
+	public GameObject startPos;
+	public GameObject endPos;
 
-	private float textureOffset = 0f;
+    private float textureOffset = 0f;
 	private bool on = false;
 	private Vector3 endPosExtendedPos;
 
@@ -15,14 +15,18 @@ public class lightsaber : MonoBehaviour {
 	void Start () 
 	{
 		lineRend = GetComponent<LineRenderer>();
-		endPosExtendedPos = endPos.localPosition;
+
+        endPosExtendedPos = endPos.GetComponent<Transform>().localPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		//turn lightsaber off and on//
-		if(OVRInput.GetDown(OVRInput.Button.One))
+        var startPosT = startPos.GetComponent<Transform>();
+        var endPosT = endPos.GetComponent<Transform>();
+
+        //turn lightsaber off and on//
+        if (OVRInput.GetDown(OVRInput.Button.One))
 		{
 			if(on)
 			{
@@ -36,17 +40,22 @@ public class lightsaber : MonoBehaviour {
 		//extend the line//
 		if(on)
 		{
-			endPos.localPosition = Vector3.Lerp(endPos.localPosition,endPosExtendedPos,Time.deltaTime*5f);
-		}
+            endPosT.localPosition = Vector3.Lerp(endPosT.localPosition,endPosExtendedPos,Time.deltaTime*5f);
+            startPos.GetComponent<Light>().enabled = true;
+            endPos.GetComponent<Light>().enabled = true;
+        }
 		//hide line//
 		else
 		{
-			endPos.localPosition = Vector3.Lerp(endPos.localPosition,startPos.localPosition,Time.deltaTime*5f);
-		}
+            endPosT.localPosition = Vector3.Lerp(endPosT.localPosition,startPosT.localPosition,Time.deltaTime*5f);
 
-		//update line positions//
-		lineRend.SetPosition(0,startPos.position);
-		lineRend.SetPosition(1,endPos.position);
+            startPos.GetComponent<Light>().enabled = false;
+            endPos.GetComponent<Light>().enabled = false;
+        }
+
+        //update line positions//
+        lineRend.SetPosition(0, startPosT.position);
+		lineRend.SetPosition(1, endPosT.position);
 
 		//pan texture//
 		textureOffset -= Time.deltaTime*2f;
