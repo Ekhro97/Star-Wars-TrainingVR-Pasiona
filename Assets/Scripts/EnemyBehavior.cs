@@ -22,7 +22,12 @@ public class EnemyBehavior : MonoBehaviour
     private float _minMovingTime;
     [SerializeField]
     private float _maxMovingTime;
-    
+    [SerializeField]
+    private GameObject _bullet;
+    [SerializeField]
+    private GameObject _bulletSpawn;
+
+
 
     #endregion
 
@@ -41,7 +46,7 @@ public class EnemyBehavior : MonoBehaviour
             System.Random random = new System.Random();
             int orientation = (random.Next(0, 2));
             double movingTime = Random.Range(_minMovingTime, _maxMovingTime);
-            Debug.Log(movingTime);
+
             while (elapsedTime < movingTime)
             {
                 if(orientation == 1)
@@ -57,12 +62,24 @@ public class EnemyBehavior : MonoBehaviour
                 yield return null;
             }
             Debug.Log("Pim");
+            Fire();
             yield return new WaitForSeconds(_chargeShotTime);
             
 
         }
     }
-        
+
+    void Fire()
+    {
+        var bullet = (GameObject)Instantiate(_bullet,_bulletSpawn.transform.position,_bulletSpawn.transform.rotation);
+
+        // Add velocity to the bullet
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+
+        // Destroy the bullet after 2 seconds
+        Destroy(bullet, 2.0f);
+    }
+
 
     #endregion
 
