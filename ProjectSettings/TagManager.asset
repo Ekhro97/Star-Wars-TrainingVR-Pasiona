@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - 
   - PostProcessing
   - DistantGrab
-  - 
-  - 
-  - 
+  - RS3D_Audio
+  - RS3D_Occluders
+  - RS3D_VirtualRoom
   - 
   - 
   - 

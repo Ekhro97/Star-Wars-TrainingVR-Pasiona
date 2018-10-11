@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
     void Awake()
     {
         velocity = this.transform.forward;
-        speed = 1;
+        speed = 10;
     }
 
 
@@ -24,7 +24,8 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision info)
     {
-        if ((info.gameObject.tag == "Player" || (info.gameObject.tag == "Room")) && (n < 3))
+        Debug.Log(info.gameObject.tag);
+        if ((info.gameObject.tag == "Player" || (info.gameObject.tag == "Room")) && (n < 10))
         {
             n++;
             foreach (var contact in info.contacts)
