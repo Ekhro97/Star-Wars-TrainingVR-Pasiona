@@ -52,7 +52,7 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 10
@@ -627,6 +627,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313970371087682, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 33927106308280594, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
     - {fileID: 23761104141517712, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc, type: 2}
@@ -812,6 +816,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 48482b2d832084e088b19ce905b45889,
     type: 3}
   m_PrefabInternal: {fileID: 454877133}
+--- !u!1 &464832274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1313970371087682, guid: 3e29b6a69c11d5a43b6c6e044f47a7cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 356113953}
+--- !u!114 &464832279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464832274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1773642725, guid: 6995e5f4125da4bd183d041c1e88ea91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bUseCustomHRTFSelection: 0
+  bSuggestHRTFInterp: 0
+  fHeadRadius: 0.1
+  fNeckHeight: 0.05
+  fTorsoRadius: 0.23
+  fHeadRadius_Default: 0.1
+  fNeckHeight_Default: 0.05
+  fTorsoRadius_Default: 0.23
+  fPrevUnitScaleFactor: 1
+  fUnitScaleFactor: 1
+  nHRTFSelected: 0
+  nLoggingOn: 0
+  sHRTFDescriptions:
+  - Default
+  - Bassy_LG_Ear
+  - Bassy_SM_Ear
+  - Thin_LG_Ear
+  - Thin_SM_Ear
+  eUNITType: 1
+  theLicenseType: 0
 --- !u!1001 &478834702
 Prefab:
   m_ObjectHideFlags: 0
@@ -1237,7 +1277,8 @@ GameObject:
   - component: {fileID: 745526919}
   - component: {fileID: 745526918}
   - component: {fileID: 745526916}
-  m_Layer: 0
+  - component: {fileID: 745526917}
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,11 +1298,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 356113954}
   _speed: 50
-  _chargeShotTime: 1.5
+  _chargeShotTime: 5
   _minMovingTime: 2
   _maxMovingTime: 6
   _bullet: {fileID: 1653172822387952, guid: 59db2a0b703dc674aa6c0e2fa44d615c, type: 2}
   _bulletSpawn: {fileID: 1222976424}
+--- !u!114 &745526917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 745526915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 960884537, guid: 6995e5f4125da4bd183d041c1e88ea91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eATTENUATION_Type: 0
+  bFastSpatialization: 0
+  bOptimize: 1
+  bShowAdvance: 0
+  bShowAudioClips: 1
+  bShowPlayFrom: 1
+  bShow3DProperties: 1
+  bShowAdvanceOptions: 1
+  bShowOptimization: 1
+  bShowMinRange: 0
+  bShowMaxRange: 0
+  bFastSpatState_Android: 1
+  bFastSpatState_Desktop: 0
+  bFastSpatState_iOS: 1
+  bUnityVersion_NAP: 0
+  fAdvanceUnitScaleFactor: 1
+  fSoundRange_MaxDist: 15
+  fSoundRange_MinDist: 0.5
+  sSourceName: Sphere
+  sAudioClipPath:
+  - Assets/Sounds/414293__robinhood76__07024-space-laser-charging.wav
+  sAudioClipLength:
+  - 00:00:02
+  theSoundOptions:
+  - fVolume: 1
+    fOriginalVolume: 1
+    fPitch: 1
+    fDopplerLevel: 1
+    bLoopSound: 0
+    bMuteSound: 0
+    bPlayOnStart: 0
+    bPlay3DSound: 1
+    bShowSoundOptions: 1
+    bWasPlaying: 0
+    bOptimizePauseOn: 0
+    bOptimizeResumeOn: 0
+    bFXReverb: 0
+    fFXReverbLength: 0
+    eFXReverbState: 1
+    bVirtualRoomChange_MuteSound: 0
+    bDopplerDamper: 0
+    bUseHRTFInterpolation: 0
+    theAudioMixerGroup: {fileID: 0}
+    lfDirectArrival: 0
+    lfEarlyReflections: 0
+    lfLateTail: 0
+  nNodeCount: 1
+  nShownClips: 1
+  nPlayFromHours: 0
+  nPlayFromMins: 0
+  nPlayFromSecs: 0
+  fPlayFromLength: 0
+  rsAudioClips:
+  - {fileID: 8300000, guid: 0e9e7f1c882d4184ea90809cfab3ea54, type: 3}
+  tempAudioClips: []
 --- !u!23 &745526918
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2110,11 +2217,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4874673323090082, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4187493571071518, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4502118374177746, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_RootOrder
@@ -2142,7 +2249,7 @@ Prefab:
       objectReference: {fileID: 1294421388}
     - target: {fileID: 4784818741903200, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1419001922976310, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_TagString
@@ -2171,6 +2278,18 @@ Prefab:
     - target: {fileID: 1279973394791190, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
       propertyPath: m_TagString
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062195736357102, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062195736357102, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062195736357102, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da8d00cf7a2ae124a8a283c88f8b8e3d, type: 2}

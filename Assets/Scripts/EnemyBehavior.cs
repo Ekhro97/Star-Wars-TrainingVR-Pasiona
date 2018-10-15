@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -40,7 +41,7 @@ public class EnemyBehavior : MonoBehaviour
             float elapsedTime = 0f;
             System.Random random = new System.Random();
             int orientation = (random.Next(0, 2));
-            double movingTime = Random.Range(_minMovingTime, _maxMovingTime);
+            double movingTime = UnityEngine.Random.Range(_minMovingTime, _maxMovingTime);
 
             while (elapsedTime < movingTime)
             {
@@ -56,17 +57,22 @@ public class EnemyBehavior : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
+            PlaySound();
+            yield return new WaitForSeconds(GetComponent<RealSpace3D.RealSpace3D_AudioSource>().rs3d_GetClipLength() - 0.5f);
             Fire();
-            yield return new WaitForSeconds(_chargeShotTime);
-            
 
         }
+    }
+
+    private void PlaySound()
+    {
+        GetComponent<RealSpace3D.RealSpace3D_AudioSource>().rs3d_PlaySound();
     }
 
     void Fire()
     {
         var bullet = (GameObject)Instantiate(_bullet,_bulletSpawn.transform.position,_bulletSpawn.transform.rotation);
-
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
 
