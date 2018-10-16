@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ public class Bullet : MonoBehaviour {
     public GameObject _bulletHole;
 
     private Vector3 velocity;
-    private int n = 0;
 
     void Awake()
     {
@@ -24,28 +24,41 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision info)
     {
-        //Debug.Log(info.gameObject.tag);
-        //if ((info.gameObject.tag == "Player" || (info.gameObject.tag == "Room")) && (n < 10))
-        //{
-        //    n++;
-        //    foreach (var contact in info.contacts)
-        //    {
-        //        velocity = Quaternion.AngleAxis(180, contact.normal) * transform.forward * -1;
-        //    }
-        //}
-        //else
-        //    Destroy(gameObject);
         if (info.gameObject.tag.Equals("Room"))
         {
             Instantiate(_bulletHole, transform.position, Quaternion.FromToRotation(Vector3.up, info.contacts[0].normal));
             Destroy(gameObject);
         }else if(info.gameObject.tag.Equals("Sword"))
         {
-            n++;
+
             foreach (var contact in info.contacts)
             {
                 velocity = Quaternion.AngleAxis(180, contact.normal) * transform.forward * -1;
             }
+
+            if (info.collider.gameObject.tag == "Right")
+            {
+                StartCoroutine(Vibrate(true));
+            }else if (info.collider.gameObject.tag == "Left")
+            {
+                StartCoroutine(Vibrate(false));
+            }
+        }
+    }
+
+    IEnumerator Vibrate(bool v)
+    {
+        if (v)
+        {
+            OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.RTouch);
+            yield return new WaitForSeconds(0.2f);
+            OVRInput.SetControllerVibration(0.0f, 0.0f, OVRInput.Controller.RTouch);
+        }
+        else
+        {
+            OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.LTouch);
+            yield return new WaitForSeconds(0.2f);
+            OVRInput.SetControllerVibration(0.0f, 0.0f, OVRInput.Controller.LTouch);
         }
     }
 }
