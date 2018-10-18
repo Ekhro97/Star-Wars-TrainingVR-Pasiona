@@ -36,10 +36,10 @@ public class Bullet : MonoBehaviour {
                 velocity = Quaternion.AngleAxis(180, contact.normal) * transform.forward * -1;
             }
 
-            if (info.collider.gameObject.tag == "Right")
+            if (info.collider.gameObject.name == "Lightsaber_R")
             {
                 StartCoroutine(Vibrate(true));
-            }else if (info.collider.gameObject.tag == "Left")
+            }else if (info.collider.gameObject.name == "Lightsaber_L")
             {
                 StartCoroutine(Vibrate(false));
             }

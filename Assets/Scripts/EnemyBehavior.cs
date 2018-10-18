@@ -13,8 +13,6 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField]
     private float _speed;
     [SerializeField]
-    private float _chargeShotTime;
-    [SerializeField]
     private float _minMovingTime;
     [SerializeField]
     private float _maxMovingTime;

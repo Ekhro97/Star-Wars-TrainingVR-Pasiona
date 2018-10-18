@@ -5,48 +5,41 @@ using UnityEngine;
 public class SwordsCollision : MonoBehaviour {
 
     public GameObject particlePrefab;
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.collider.gameObject.tag == "Right" || collision.collider.gameObject.tag == "Left")
-    //    {
-    //        OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.RTouch);
-    //        OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.LTouch);
-    //    }
+    public GameObject sparkPrefab;
 
-    //    Instantiate(particlePrefab, collision.contacts[0].point, new Quaternion());
-    //}
+    private GameObject swordParticles;
+    private GameObject sparkParticles;
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.tag == "Right" || collision.collider.gameObject.tag == "Left")
+        if (collision.collider.gameObject.tag == "Sword")
+        {
+            swordParticles = Instantiate(particlePrefab, collision.contacts[0].point, new Quaternion());
+            sparkParticles = Instantiate(sparkPrefab, collision.contacts[0].point, new Quaternion());
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.gameObject.tag == "Sword")
         {
             OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.RTouch);
             OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.LTouch);
 
-            Debug.Log("test");
-            Instantiate(particlePrefab, collision.contacts[0].point, new Quaternion());
+            swordParticles.transform.position = collision.contacts[0].point;
+            sparkParticles.transform.position = collision.contacts[0].point;
 
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.gameObject.tag == "Right" || collision.collider.gameObject.tag == "Left")
+        if (collision.collider.gameObject.tag == "Sword")
         {
             OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
             OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.LTouch);
-        }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Right" || other.gameObject.tag == "Left")
-        {
-            OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.RTouch);
-            OVRInput.SetControllerVibration(0.4f, 0.4f, OVRInput.Controller.LTouch);
-
-            Debug.Log("test");
-            //Instantiate(particlePrefab, collision.contacts[0].point, new Quaternion());
-
+            Destroy(swordParticles);
+            Destroy(sparkParticles);
         }
     }
 }
