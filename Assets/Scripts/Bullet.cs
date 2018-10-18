@@ -39,9 +39,12 @@ public class Bullet : MonoBehaviour {
             if (info.collider.gameObject.name == "Lightsaber_R")
             {
                 StartCoroutine(Vibrate(true));
-            }else if (info.collider.gameObject.name == "Lightsaber_L")
+                info.collider.gameObject.GetComponent<AudioSource>().Play();
+            }
+            else if (info.collider.gameObject.name == "Lightsaber_L")
             {
                 StartCoroutine(Vibrate(false));
+                info.collider.gameObject.GetComponent<AudioSource>().Play();
             }
         }
     }
