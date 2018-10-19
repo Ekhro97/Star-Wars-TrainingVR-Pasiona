@@ -84,10 +84,10 @@ public class OptionsMenuNew : MonoBehaviour {
 
 		// check hud value
 		if(PlayerPrefs.GetInt("ShowHUD")==0){
-			showhudtext.GetComponent<Text>().text = "One";
+			showhudtext.GetComponent<Text>().text = "Two";
 		}
 		else{
-			showhudtext.GetComponent<Text>().text = "Two";
+			showhudtext.GetComponent<Text>().text = "One";
 		}
 
 		// check shadow distance/enabled
@@ -227,11 +227,11 @@ public class OptionsMenuNew : MonoBehaviour {
 	public void  ShowHUD (){
 		if(PlayerPrefs.GetInt("ShowHUD")==0){
 			PlayerPrefs.SetInt("ShowHUD",1);
-			showhudtext.GetComponent<Text>().text = "One";
+			showhudtext.GetComponent<Text>().text = "Two";
 		}
 		else if(PlayerPrefs.GetInt("ShowHUD")==1){
 			PlayerPrefs.SetInt("ShowHUD",0);
-			showhudtext.GetComponent<Text>().text = "Two";
+			showhudtext.GetComponent<Text>().text = "One";
 		}
 	}
 

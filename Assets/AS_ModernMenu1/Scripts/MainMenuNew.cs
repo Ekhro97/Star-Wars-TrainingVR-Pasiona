@@ -203,10 +203,14 @@ public class MainMenuNew : MonoBehaviour {
         {
             SwordsCount = 1;
             PlayerPrefs.SetInt("SwordsNumber", 1);
+
+            Debug.Log(PlayerPrefs.GetInt("SwordsNumber"));
         }else if(SwordsCount == 1)
         {
             SwordsCount = 0;
             PlayerPrefs.SetInt("SwordsNumber", 0);
+
+            Debug.Log(PlayerPrefs.GetInt("SwordsNumber"));
         }
     }
 
