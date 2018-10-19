@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour {
     public GameObject _bulletHole;
 
     private Vector3 velocity;
+    private HealthBehavior _healthBehavior;
+    private EnemyBehavior _enemyBehavior;
 
     private AudioSource sound;
     private AudioController audioController;
@@ -22,6 +24,9 @@ public class Bullet : MonoBehaviour {
         sound.volume = sound.volume * audioController.masterVolume;
 
         velocity = this.transform.forward;
+
+        _healthBehavior = FindObjectOfType<HealthBehavior>();
+        _enemyBehavior = FindObjectOfType<EnemyBehavior>();
     }
 
 
@@ -37,7 +42,8 @@ public class Bullet : MonoBehaviour {
         {
             Instantiate(_bulletHole, transform.position, Quaternion.FromToRotation(Vector3.up, info.contacts[0].normal));
             Destroy(gameObject);
-        }else if(info.gameObject.tag.Equals("Sword"))
+        }
+        else if(info.gameObject.tag.Equals("Sword"))
         {
 
             foreach (var contact in info.contacts)
@@ -55,6 +61,12 @@ public class Bullet : MonoBehaviour {
             }
 
             sound.Play();
+        }
+        else
+        {
+            Destroy(gameObject);
+            _healthBehavior.DecreaseHealth(_enemyBehavior.Damage);
+            
         }
     }
 
@@ -74,3 +86,4 @@ public class Bullet : MonoBehaviour {
         }
     }
 }
+

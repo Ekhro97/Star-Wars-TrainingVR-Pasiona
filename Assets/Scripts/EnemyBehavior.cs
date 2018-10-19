@@ -20,6 +20,14 @@ public class EnemyBehavior : MonoBehaviour
     private GameObject _bullet;
     [SerializeField]
     private GameObject _bulletSpawn;
+    [SerializeField]
+    private float _damage;
+
+    public float Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
 
     private AudioController audioController;
     private RealSpace3D.RealSpace3D_AudioSource sound;
@@ -84,6 +92,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Fire()
     {
+        
         var bullet = (GameObject)Instantiate(_bullet,_bulletSpawn.transform.position,_bulletSpawn.transform.rotation);
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
