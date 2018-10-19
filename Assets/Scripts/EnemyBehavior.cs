@@ -21,21 +21,33 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField]
     private GameObject _bulletSpawn;
 
-
+    private AudioController audioController;
+    private RealSpace3D.RealSpace3D_AudioSource sound;
 
     #endregion
 
     #region Main Methods
 
+    private void Awake()
+    {
+        audioController = FindObjectOfType<AudioController>();
+
+        sound = GetComponent<RealSpace3D.RealSpace3D_AudioSource>();
+        sound.rsAudioClips.Insert(0,audioController.DroneShot);
+
+    }
+
     private void Start()
     {
         StartCoroutine(RandomWait());
+
     }
 
     IEnumerator RandomWait()
     {
         while (true)
         {
+
             float elapsedTime = 0f;
             System.Random random = new System.Random();
             int orientation = (random.Next(0, 2));
@@ -51,7 +63,6 @@ public class EnemyBehavior : MonoBehaviour
                 {
                     transform.RotateAround(_player.transform.position, Vector3.down, _speed * Time.fixedDeltaTime);
                 }
-                
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -65,7 +76,10 @@ public class EnemyBehavior : MonoBehaviour
 
     private void PlaySound()
     {
-        GetComponent<RealSpace3D.RealSpace3D_AudioSource>().rs3d_PlaySound();
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red * 0.5f);
+
+        sound.rs3d_AdjustVolume(sound.rs3d_GetVolume() * audioController.masterVolume);
+        sound.rs3d_PlaySound(0);
     }
 
     void Fire()
@@ -76,6 +90,7 @@ public class EnemyBehavior : MonoBehaviour
 
         // Destroy the bullet after 2 seconds
         Destroy(bullet, 10.0f);
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red * 0);
     }
 
 

@@ -83,15 +83,18 @@ public class OptionsMenuNew : MonoBehaviour {
 		}
 
 		// check hud value
-		if(PlayerPrefs.GetInt("ShowHUD")==0){
-			showhudtext.GetComponent<Text>().text = "Two";
-		}
-		else{
+		if(PlayerPrefs.GetInt("Swords")==0){
 			showhudtext.GetComponent<Text>().text = "One";
-		}
+            Debug.Log("0");
+        }
+        else
+        {
+			showhudtext.GetComponent<Text>().text = "Two";
+            Debug.Log("1");
+        }
 
-		// check shadow distance/enabled
-		if(PlayerPrefs.GetInt("Shadows") == 0){
+        // check shadow distance/enabled
+        if (PlayerPrefs.GetInt("Shadows") == 0){
 			QualitySettings.shadowCascades = 0;
 			QualitySettings.shadowDistance = 0;
 			shadowofftext.GetComponent<Text>().text = "OFF";
@@ -225,15 +228,17 @@ public class OptionsMenuNew : MonoBehaviour {
 
 	// the playerprefs variable that is checked to enable hud while in game
 	public void  ShowHUD (){
-		if(PlayerPrefs.GetInt("ShowHUD")==0){
-			PlayerPrefs.SetInt("ShowHUD",1);
+		if(PlayerPrefs.GetInt("Swords")==0){
+			PlayerPrefs.SetInt("Swords", 1);
 			showhudtext.GetComponent<Text>().text = "Two";
+            Debug.Log("0");
 		}
-		else if(PlayerPrefs.GetInt("ShowHUD")==1){
-			PlayerPrefs.SetInt("ShowHUD",0);
+		else if(PlayerPrefs.GetInt("Swords")==1){
+			PlayerPrefs.SetInt("Swords", 0);
 			showhudtext.GetComponent<Text>().text = "One";
-		}
-	}
+            Debug.Log("1");      
+        }
+    }
 
 	// show tool tips like: 'How to Play' control pop ups
 	public void  ToolTips (){

@@ -197,22 +197,6 @@ public class MainMenuNew : MonoBehaviour {
     {
         SceneManager.LoadScene("MainScene");
     }
-    public void SetSwords()
-    {
-        if (SwordsCount == 0)
-        {
-            SwordsCount = 1;
-            PlayerPrefs.SetInt("SwordsNumber", 1);
-
-            Debug.Log(PlayerPrefs.GetInt("SwordsNumber"));
-        }else if(SwordsCount == 1)
-        {
-            SwordsCount = 0;
-            PlayerPrefs.SetInt("SwordsNumber", 0);
-
-            Debug.Log(PlayerPrefs.GetInt("SwordsNumber"));
-        }
-    }
 
 	public void  No (){
 		PanelareYouSure.gameObject.SetActive(false);

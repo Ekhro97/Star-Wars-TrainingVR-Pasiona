@@ -26,10 +26,10 @@ public class Lightsaber : MonoBehaviour {
     [Tooltip("The blade and light color. Alpha should be set, the higher alpha is, the bigger the glow effect. If alpha is 0, then there's no glow effect.")]
     public Color bladeColor;
 
-    public AudioClip soundOn;
-    public AudioClip soundOff;
-    public AudioClip soundLoop;
-    public AudioClip soundSwing;
+    private AudioClip soundOn;
+    private AudioClip soundOff;
+    private AudioClip soundLoop;
+    private AudioClip soundSwing;
 
     public AudioSource AudioSource;
     public AudioSource AudioSourceLoop;
@@ -40,7 +40,7 @@ public class Lightsaber : MonoBehaviour {
     // TODO: make it depend on velocity of VR controller
     private float swingSpeed = 0;
     private Vector3 lastSwingPosition = Vector3.zero;
-
+    private AudioController audioController;
     /// <summary>
     /// Properties of a single blade.
     /// This way you can attach multiple blades to a lightsaber
@@ -171,6 +171,8 @@ public class Lightsaber : MonoBehaviour {
     // Use this for initialization
     void Awake () {
 
+        audioController = FindObjectOfType<AudioController>();
+
         // consistency check
         if (bladeGameObjects.Count == 0) {
             Debug.LogError("No blades found. Must have at least 1 blade!");
@@ -199,9 +201,15 @@ public class Lightsaber : MonoBehaviour {
     void InitializeAudio()
     {
 
+        soundLoop = audioController.LightsaberLoop;
+        soundOn = audioController.LightsaberOn;
+        soundOff = audioController.LightsaberOff;
+        soundSwing = audioController.LightsaberSwing;
+
         // initialize audio depending on beam activitiy
         if (saberActive)
         {
+            AudioSourceLoop.volume = AudioSourceLoop.volume * audioController.masterVolume;
             AudioSourceLoop.clip = soundLoop;
             AudioSourceLoop.Play();
         }
@@ -236,7 +244,7 @@ public class Lightsaber : MonoBehaviour {
         }else if (OVRInput.GetDown(OVRInput.Button.Three))
         {
             ToggleLightsaberOnOff("Blade_L");
-        }
+        }   
 
         UpdateBlades();
 
@@ -270,7 +278,7 @@ public class Lightsaber : MonoBehaviour {
                 {
                     if (!AudioSourceSwing.isPlaying)
                     {
-                        AudioSourceSwing.volume = 1f;
+                        AudioSourceSwing.volume = 1f *audioController.masterVolume;
                         AudioSourceSwing.PlayOneShot(soundSwing);
                     }
                 }
@@ -315,7 +323,8 @@ public class Lightsaber : MonoBehaviour {
                 blade.SetActive(true);
 
                 transform.parent.gameObject.GetComponent<Collider>().enabled = true;
-                AudioSource.PlayOneShot(soundOn);
+
+                AudioSource.PlayOneShot(soundOn, audioController.masterVolume);
                 AudioSourceLoop.clip = soundLoop;
                 AudioSourceLoop.Play();
             }
@@ -331,9 +340,21 @@ public class Lightsaber : MonoBehaviour {
                 blade.SetActive(false);
 
                 transform.parent.gameObject.GetComponent<Collider>().enabled = false;
-                AudioSource.PlayOneShot(soundOff);
+                AudioSource.PlayOneShot(soundOff, audioController.masterVolume);
                 AudioSourceLoop.Stop();
             }
+        }
+
+        var particles = GameObject.FindGameObjectsWithTag("Particle");
+        var lSword = GameObject.Find("Lightsaber_L");
+        var rSword = GameObject.Find("Lightsaber_R");
+
+        lSword.GetComponent<AudioSource>().Stop();
+        rSword.GetComponent<AudioSource>().Stop();
+
+        foreach (var item in particles)
+        {
+            Destroy(item);
         }
     }
 

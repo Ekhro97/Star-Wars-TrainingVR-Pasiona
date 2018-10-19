@@ -19,7 +19,7 @@ public class IniGame : MonoBehaviour {
 
     private void SetSwords()
     {
-        var swordNumber = PlayerPrefs.GetInt("SwordsNumber");
+        var swordNumber = PlayerPrefs.GetInt("Swords");
 
         if(swordNumber == 0)
         {
@@ -42,9 +42,10 @@ public class IniGame : MonoBehaviour {
 
     private static void SetDifficulty(List<EnemyBehavior> hola)
     {
-        var difficulty = PlayerPrefs.GetInt("ShowHUD");
+        var normal = PlayerPrefs.GetInt("NormalDifficulty");
+        var hardcore = PlayerPrefs.GetInt("HardCoreDifficulty");
 
-        if(difficulty == 1)
+        if(hardcore == 1)
         {
             for (int i = 0; i < hola.Count; i++)
             {

@@ -10,8 +10,17 @@ public class Bullet : MonoBehaviour {
 
     private Vector3 velocity;
 
+    private AudioSource sound;
+    private AudioController audioController;
+
     void Awake()
     {
+        sound = GetComponent<AudioSource>();
+        audioController = FindObjectOfType<AudioController>();
+
+        sound.clip = audioController.SaberStrike;
+        sound.volume = sound.volume * audioController.masterVolume;
+
         velocity = this.transform.forward;
     }
 
@@ -39,13 +48,13 @@ public class Bullet : MonoBehaviour {
             if (info.collider.gameObject.name == "Lightsaber_R")
             {
                 StartCoroutine(Vibrate(true));
-                info.collider.gameObject.GetComponent<AudioSource>().Play();
             }
             else if (info.collider.gameObject.name == "Lightsaber_L")
             {
                 StartCoroutine(Vibrate(false));
-                info.collider.gameObject.GetComponent<AudioSource>().Play();
             }
+
+            sound.Play();
         }
     }
 
