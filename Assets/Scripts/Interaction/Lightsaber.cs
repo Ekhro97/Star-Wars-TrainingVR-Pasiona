@@ -169,7 +169,7 @@ public class Lightsaber : MonoBehaviour {
     private List<Blade> blades;
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
 
         audioController = FindObjectOfType<AudioController>();
 
@@ -209,8 +209,8 @@ public class Lightsaber : MonoBehaviour {
         // initialize audio depending on beam activitiy
         if (saberActive)
         {
-            AudioSourceLoop.volume = AudioSourceLoop.volume * audioController.masterVolume;
             AudioSourceLoop.clip = soundLoop;
+            AudioSourceLoop.volume = AudioSourceLoop.volume * audioController.masterVolume;
             AudioSourceLoop.Play();
         }
 
@@ -346,11 +346,19 @@ public class Lightsaber : MonoBehaviour {
         }
 
         var particles = GameObject.FindGameObjectsWithTag("Particle");
-        var lSword = GameObject.Find("Lightsaber_L");
-        var rSword = GameObject.Find("Lightsaber_R");
 
-        lSword.GetComponent<AudioSource>().Stop();
-        rSword.GetComponent<AudioSource>().Stop();
+        var lSword = GameObject.Find("Lightsaber_L").GetComponent<AudioSource>();
+        var rSword = GameObject.Find("Lightsaber_R").GetComponent<AudioSource>();
+
+        if (lSword != null)
+        {
+            lSword.GetComponent<AudioSource>().Stop();
+        }
+
+        if (rSword != null)
+        {
+            rSword.GetComponent<AudioSource>().Stop();
+        }
 
         foreach (var item in particles)
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthBehavior : MonoBehaviour {
 
@@ -24,18 +25,20 @@ public class HealthBehavior : MonoBehaviour {
     public void DecreaseHealth(float damage)
     {
 
-        if (_currentHealth >= 0)
+        if (_currentHealth > 0)
         {
 
             _currentHealth -= damage;
 
         }
-        else
+
+        if(_currentHealth == 0)
         {
 
-            Debug.Log("GameOver");
+            SceneManager.LoadScene("Menu_Scene");
 
         }
+
     }
 
     /// <summary>

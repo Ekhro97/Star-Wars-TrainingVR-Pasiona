@@ -85,12 +85,12 @@ public class OptionsMenuNew : MonoBehaviour {
 		// check hud value
 		if(PlayerPrefs.GetInt("Swords")==0){
 			showhudtext.GetComponent<Text>().text = "One";
-            Debug.Log("0");
+
         }
         else
         {
 			showhudtext.GetComponent<Text>().text = "Two";
-            Debug.Log("1");
+
         }
 
         // check shadow distance/enabled
