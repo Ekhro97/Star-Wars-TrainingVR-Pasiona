@@ -42,6 +42,7 @@ public class HealthBehavior : MonoBehaviour {
         {
 
             _currentHealth -= damage;
+
             BleedBehavior.BloodAmount += Mathf.Clamp01(damageBloodAmount * damage / _currentHealth);
 
         }
