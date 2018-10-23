@@ -6,6 +6,15 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    #region Public Variables
+
+    public float Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
+
+    #endregion
 
     #region Private Variables
 
@@ -29,12 +38,6 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField]
     private float _damage;
-
-    public float Damage
-    {
-        get { return _damage; }
-        set { _damage = value; }
-    }
 
     private AudioController audioController;
 

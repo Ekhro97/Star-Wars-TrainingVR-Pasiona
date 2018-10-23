@@ -11,7 +11,7 @@ public class BulletBehavior : MonoBehaviour {
     [SerializeField]
     private GameObject _bulletHole;
 
-    private Vector3 _velocity;
+    private Vector3 _direction;
 
     private HealthBehavior _healthBehavior;
 
@@ -32,7 +32,7 @@ public class BulletBehavior : MonoBehaviour {
 
         _audioSource.volume = _audioSource.volume * _audioController.masterVolume;
 
-        _velocity = this.transform.forward;
+        _direction = this.transform.forward;
 
         _healthBehavior = FindObjectOfType<HealthBehavior>();
 
@@ -44,7 +44,7 @@ public class BulletBehavior : MonoBehaviour {
     void Update()
     {
 
-        this.transform.position += _velocity * Time.deltaTime * speed;
+        this.transform.position += _direction * Time.deltaTime * speed;
 
     }
 
@@ -65,7 +65,7 @@ public class BulletBehavior : MonoBehaviour {
             foreach (var contact in info.contacts)
             {
 
-                _velocity = Quaternion.AngleAxis(180, contact.normal) * transform.forward * -1;
+                _direction = Quaternion.AngleAxis(180, contact.normal) * transform.forward * -1;
 
             }
 
