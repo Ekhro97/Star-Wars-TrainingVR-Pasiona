@@ -81,7 +81,7 @@ public class SwordsCollision : MonoBehaviour {
     private void OnCollisionExit(Collision collision)
     {
 
-        if (collision.collider.gameObject.tag == "Sword")
+        if (collision.collider.gameObject.tag == "Sword" || collision.collider.gameObject.tag == "Room")
         {
 
             OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
