@@ -115,7 +115,7 @@ public class EnemyBehavior : MonoBehaviour
 
         GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red * 0.5f);
 
-        sound.rs3d_AdjustVolume(sound.rs3d_GetVolume() * audioController.masterVolume);
+        sound.rs3d_AdjustVolume(sound.rs3d_GetVolume() * (audioController.masterVolume * 2));
 
         sound.rs3d_PlaySound(0);
 

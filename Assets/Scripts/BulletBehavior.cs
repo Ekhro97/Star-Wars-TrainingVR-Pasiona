@@ -30,7 +30,7 @@ public class BulletBehavior : MonoBehaviour {
 
         _audioSource.clip = _audioController.SaberStrike;
 
-        _audioSource.volume = _audioSource.volume * _audioController.masterVolume;
+        _audioSource.volume = _audioSource.volume * _audioController.masterVolume/10;
 
         _direction = this.transform.forward;
 

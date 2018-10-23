@@ -172,7 +172,7 @@ public class Lightsaber : MonoBehaviour {
     void Start () {
 
         audioController = FindObjectOfType<AudioController>();
-
+        saberActive = false;
         // consistency check
         if (bladeGameObjects.Count == 0) {
             Debug.LogError("No blades found. Must have at least 1 blade!");
@@ -321,12 +321,13 @@ public class Lightsaber : MonoBehaviour {
             if (blade.gameObject.name == sword)
             {
                 blade.SetActive(true);
-
+                saberActive = true;
                 transform.parent.gameObject.GetComponent<Collider>().enabled = true;
 
-                AudioSource.PlayOneShot(soundOn, audioController.masterVolume);
+                AudioSource.PlayOneShot(soundOn, audioController.masterVolume/10);
                 AudioSourceLoop.clip = soundLoop;
                 AudioSourceLoop.Play();
+                
             }
         }      
     }
@@ -338,22 +339,27 @@ public class Lightsaber : MonoBehaviour {
             if(blade.gameObject.name == sword)
             {
                 blade.SetActive(false);
-
+                saberActive = false;
                 transform.parent.gameObject.GetComponent<Collider>().enabled = false;
-                AudioSource.PlayOneShot(soundOff, audioController.masterVolume);
+                AudioSource.PlayOneShot(soundOff, audioController.masterVolume/10);
                 AudioSourceLoop.Stop();
+                
             }
         }
 
         var particles = GameObject.FindGameObjectsWithTag("Particle");
-
-        var lSword = GameObject.Find("Lightsaber_L").GetComponent<AudioSource>();
+        if (PlayerPrefs.GetInt("Swords") == 1)
+        {
+            var lSword = GameObject.Find("Lightsaber_L").GetComponent<AudioSource>();
+            if (lSword != null)
+            {
+                lSword.GetComponent<AudioSource>().Stop();
+            }
+        }
+        
         var rSword = GameObject.Find("Lightsaber_R").GetComponent<AudioSource>();
 
-        if (lSword != null)
-        {
-            lSword.GetComponent<AudioSource>().Stop();
-        }
+        
 
         if (rSword != null)
         {
